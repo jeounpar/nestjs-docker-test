@@ -29,7 +29,7 @@ jobs:
 
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
-      run:
+      run: |
         docker build -t nestjs-docker-test .
         docker tag nestjs-docker-test:latest 192619217219.dkr.ecr.ap-northeast-2.amazonaws.com/nestjs-docker-test:latest
         docker push 192619217219.dkr.ecr.ap-northeast-2.amazonaws.com/nestjs-docker-test:latest
