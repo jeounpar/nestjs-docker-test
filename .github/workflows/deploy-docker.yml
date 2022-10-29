@@ -28,7 +28,14 @@ jobs:
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: Build, tag, and push image to Amazon ECR
+      uses: docker/build-push-action@v2
       id: build-image
+      with:
+        context: .
+        push: true
+        tags: user/app:latest
+        cache-from: type=gha # 여기서 gha 는 Guthub Actions 용 캐시를 의미합니다.
+        cache-to: type=gha,mode=max
       run: |
         docker build -t nestjs-docker-test .
         docker tag nestjs-docker-test:latest 192619217219.dkr.ecr.ap-northeast-2.amazonaws.com/nestjs-docker-test:latest
